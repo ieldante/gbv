@@ -2,15 +2,14 @@
 
 **Adversarial-Resistant Ground-truth ObservatioN - Verification**
 
-## Status
+## Operational Status
 
-**Protocol Design Draft (v0.1)**
+**Current phase:** Active development with protocol hardening (v0.1).
 
-ARGON-V is a systems protocol for establishing high-confidence web observations in adversarial environments. Unlike traditional verification methods that assume a trusted execution environment or platform cooperation, ARGON-V explicitly assumes an untrusted client and a non-cooperative platform.
+This repository serves as the canonical home for the **ARGON-V** protocol. Development is actively underway, with parallel progress on implementation and formalization. Current work focuses on refining protocol invariants, expanding threat-surface coverage, and validating design assumptions against realistic adversarial models.
 
-At this stage, the repository documents the protocol design, threat model, security rationale, and system architecture. A working reference implementation exists but is not yet open-sourced while the specification and invariant model are finalized.
-
----
+> [!NOTE]
+> While core protocol mechanics are implemented, certain components remain under iterative refinement as security assumptions and edge cases are stress-tested. Interfaces and internal representations may evolve prior to the v0.1 stabilization milestone.
 
 ## The Economic Model of Trust
 
@@ -42,15 +41,6 @@ The ARGON-V pipeline enforces three primary safety properties:
 - **`docs/theory`** — Systems analysis and economic-security reasoning. Includes the [research paper](docs/theory/research-paper-v0.1.pdf).
 
 ---
-
-## Operational Status
-
-**Current phase:** Active development with protocol hardening (v0.1).
-
-This repository serves as the canonical home for the **ARGON-V** protocol. Development is actively underway, with parallel progress on implementation and formalization. Current work focuses on refining protocol invariants, expanding threat-surface coverage, and validating design assumptions against realistic adversarial models.
-
-> [!NOTE]
-> While core protocol mechanics are implemented, certain components remain under iterative refinement as security assumptions and edge cases are stress-tested. Interfaces and internal representations may evolve prior to the v0.1 stabilization milestone.
 
 ### Ongoing Work
 
