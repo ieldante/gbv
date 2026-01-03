@@ -1,7 +1,9 @@
-# ARGON-V  
+# ARGON-V
+
 **Adversarial-Resistant Ground-truth ObservatioN - Verification**
 
 ## Status
+
 **Protocol Design Draft (v0.1)**
 
 ARGON-V is a systems protocol for establishing high-confidence web observations in adversarial environments. Unlike traditional verification methods that assume a trusted execution environment or platform cooperation, ARGON-V explicitly assumes an untrusted client and a non-cooperative platform.
@@ -14,7 +16,7 @@ At this stage, the repository documents the protocol design, threat model, secur
 
 ARGON-V does not attempt to provide a mathematical guarantee of absolute truth, which is formally impossible in an unmanaged client environment. Instead, it enforces **economic cost asymmetry**.
 
-By requiring simultaneous multi-surface semantic consistency—tied to ephemeral, server-issued challenges—the protocol raises the complexity and labor cost of a successful forgery beyond the expected utility of the exploit. In effect, ARGON-V transforms a *data manipulation* problem into a *coherent narrative forgery* problem, which is significantly harder to automate and sustain.
+By requiring simultaneous multi-surface semantic consistency—tied to ephemeral, server-issued challenges—the protocol raises the complexity and labor cost of a successful forgery beyond the expected utility of the exploit. In effect, ARGON-V transforms a _data manipulation_ problem into a _coherent narrative forgery_ problem, which is significantly harder to automate and sustain.
 
 ---
 
@@ -35,19 +37,29 @@ The ARGON-V pipeline enforces three primary safety properties:
 
 ## Repository Structure
 
-- `packages/core` — Formal logic for invariant checking and pipeline state transitions  
-- `packages/providers` — Interfaces for site-specific semantic extraction  
-- `packages/extension` — Reference browser-based observation agent  
-- `apps/server` — Authoritative verification and Merkle-commitment engine  
-- `docs/theory` — Systems analysis and economic-security reasoning
+- **`apps/server`** — Authoritative verification and Merkle-commitment engine.
+- **`apps/client`** — Core client suite, including the testing DOM (`mock-pass`, `mock-fail`) and the browser extension for server interaction and verification.
+- **`docs/theory`** — Systems analysis and economic-security reasoning. Includes the [research paper](docs/theory/research-paper-v0.1.pdf).
 
 ---
 
+# ARGON-V Protocol
+
 ## Operational Status
 
-**Current phase:** Specification and threat-surface finalization.
+**Current phase:** Specification freeze and threat-surface finalization (v0.1).
 
-This repository serves as a structural and conceptual blueprint. Development is currently focused on freezing the v0.1 protocol specification and invariant model. Public implementation will follow once the security surface is sufficiently stabilized.
+This repository serves as a structural and conceptual blueprint for the **ARGON-V protocol**. Active development is currently focused on freezing the v0.1 protocol specification, invariant model, and adversarial assumptions.
+
+> [!NOTE]
+> While the protocol is in a stabilization phase, the full security surface is still being finalized before the primary implementation is promoted to the main branch.
+
+### Ongoing Work
+
+- **Open Development:** Real-time server and client progress is visible on the [**`develop` branch**](../../tree/develop).
+- **Theory & Research:** The current protocol draft and threat model are documented in the [research-paper-v0.1.pdf](docs/theory/research-paper-v0.1.pdf).
+
+Readers interested in implementation progress, design decisions, or protocol mechanics are encouraged to consult the **develop** branch and accompanying theory documentation.
 
 ---
 
