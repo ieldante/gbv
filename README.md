@@ -1,4 +1,10 @@
-# ARGON-V
+> ⚠️ **ARGON-V Development Branch**
+>
+> This branch contains active, in-progress development of the ARGON-V protocol
+> implementation. APIs, data models, and security invariants may change without
+> notice. For the stabilized protocol description, see the main branch.
+
+# ARGON-V Development Branch
 
 **Adversarial-Resistant Ground-truth ObservatioN - Verification**
 
