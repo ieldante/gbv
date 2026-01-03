@@ -45,16 +45,16 @@ The ARGON-V pipeline enforces three primary safety properties:
 
 ## Operational Status
 
-**Current phase:** Specification freeze and threat-surface finalization (v0.1).
+**Current phase:** Active development with protocol hardening (v0.1).
 
-This repository serves as a structural and conceptual blueprint for the **ARGON-V protocol**. Active development is currently focused on freezing the v0.1 protocol specification, invariant model, and adversarial assumptions.
+This repository serves as the canonical home for the **ARGON-V** protocol. Development is actively underway, with parallel progress on implementation and formalization. Current work focuses on refining protocol invariants, expanding threat-surface coverage, and validating design assumptions against realistic adversarial models.
 
 > [!NOTE]
-> While the protocol is in a stabilization phase, the full security surface is still being finalized before the primary implementation is promoted to the main branch.
+> While core protocol mechanics are implemented, certain components remain under iterative refinement as security assumptions and edge cases are stress-tested. Interfaces and internal representations may evolve prior to the v0.1 stabilization milestone.
 
 ### Ongoing Work
 
-- **Open Development:** Real-time server and client progress is visible on the [**`develop` branch**](../../tree/develop).
+- **Active Development:** Real-time server and client progress is visible on the [**`develop` branch**](../../tree/develop).
 - **Theory & Research:** The current protocol draft and threat model are documented in the [research-paper-v0.1.pdf](docs/theory/research-paper-v0.1.pdf).
 
 Readers interested in implementation progress, design decisions, or protocol mechanics are encouraged to consult the **develop** branch and accompanying theory documentation.
