@@ -43,8 +43,6 @@ The ARGON-V pipeline enforces three primary safety properties:
 
 ---
 
-# ARGON-V Protocol
-
 ## Operational Status
 
 **Current phase:** Specification freeze and threat-surface finalization (v0.1).
