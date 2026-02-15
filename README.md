@@ -1,3 +1,10 @@
+> ⚠️ **Development Branch**
+>
+> This branch contains ongoing development work for the GBV reference
+> implementation. Behavior, documentation, and interfaces may change.
+> For a stable snapshot, refer to tagged releases.
+
+
 # Glass Ballroom Verification (GBV) Reference Implementation
 
 **Glass Ballroom Verification (GBV)** is a deterministic client-server verification protocol for evaluating cross-surface semantic consistency of browser-observable artifacts under verifier authority.
