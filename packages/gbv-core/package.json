@@ -1,0 +1,17 @@
+{
+  "name": "@gbv/core",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./browser": "./src/browser.ts"
+  },
+  "dependencies": {
+    "cheerio": "^1.1.2"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "tsx --test tests/**/*.test.ts"
+  }
+}

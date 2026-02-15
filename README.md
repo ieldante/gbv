@@ -1,62 +1,215 @@
-> ⚠️ **ARGON-V Development Branch**
+# Glass Ballroom Verification (GBV) Reference Implementation
+
+**Glass Ballroom Verification (GBV)** is a deterministic client-server verification protocol for evaluating cross-surface semantic consistency of browser-observable artifacts under verifier authority.
+
+This repository provides the official GBV reference implementation. GBV is domain-agnostic; course records are included only as a reproducible demonstration environment.
+
+> **Documentation state — v0.214**
 >
-> This branch contains active, in-progress development of the ARGON-V protocol
-> implementation. APIs, data models, and security invariants may change without
-> notice. For the stabilized protocol description, see the main branch.
-
-# ARGON-V Development Branch
-
-**Adversarial-Resistant Ground-truth ObservatioN - Verification**
-
-## Operational Status
-
-**Current phase:** Active development with protocol hardening (v0.1).
-
-This repository serves as the canonical home for the **ARGON-V** protocol. Development is actively underway, with parallel progress on implementation and formalization. Current work focuses on refining protocol invariants, expanding threat-surface coverage, and validating design assumptions against realistic adversarial models.
-
-> [!NOTE]
-> While core protocol mechanics are implemented, certain components remain under iterative refinement as security assumptions and edge cases are stress-tested. Interfaces and internal representations may evolve prior to the v0.1 stabilization milestone.
-
-## The Economic Model of Trust
-
-ARGON-V does not attempt to provide a mathematical guarantee of absolute truth, which is formally impossible in an unmanaged client environment. Instead, it enforces **economic cost asymmetry**.
-
-By requiring simultaneous multi-surface semantic consistency—tied to ephemeral, server-issued challenges—the protocol raises the complexity and labor cost of a successful forgery beyond the expected utility of the exploit. In effect, ARGON-V transforms a _data manipulation_ problem into a _coherent narrative forgery_ problem, which is significantly harder to automate and sustain.
+> This repository reflects the state of the GBV reference implementation
+> as of February 14, 2026, when protocol terminology was consolidated
+> under the Glass Ballroom Verification (GBV) name. Earlier drafts may
+> reference ARGON-V terminology.
 
 ---
 
-## Core System Invariants
+## What This Repository Provides
 
-The ARGON-V pipeline enforces three primary safety properties:
+- A deterministic GBV reference environment for engineers and researchers.
+- A complete client-server verification flow:
+  - MV3 browser extension collects browser-observable surfaces.
+  - Server independently evaluates protocol invariants.
+- A transparency-first verification inspector with structured summaries and verbatim server payloads.
 
-- **Temporal Freshness**  
-  Observations are cryptographically bound to an ephemeral, high-entropy nonce to prevent replay and pre-computed state injection.
-
-- **Semantic Coherence**  
-  Facts are extracted from multiple independent observation surfaces. Verification requires that all surfaces maintain logical consistency (e.g., a dashboard total must equal the sum of its ledger entries).
-
-- **Deterministic Canonicalization**  
-  Raw DOM artifacts are mapped into a strictly typed, server-authoritative schema, neutralizing client-side heuristic manipulation and UI noise.
+GBV evaluates whether independently observed surfaces can represent a single coherent state without requiring privileged provider access or shared ground truth.
 
 ---
 
-## Repository Structure
+## What This Repository Is Not
 
-- **`apps/server`** — Authoritative verification and Merkle-commitment engine.
-- **`apps/client`** — Core client suite, including the testing DOM (`mock-pass`, `mock-fail`) and the browser extension for server interaction and verification.
-- **`docs/theory`** — Systems analysis and economic-security reasoning. Includes the [research paper](docs/theory/research-paper-v0.1.pdf).
+- Not a production credential verification service.
+- Not a hosted SaaS deployment.
+- Not a provider-integrated system with authentication, rate limiting, or tenant isolation.
+
+This repository is a protocol reference and research implementation.
 
 ---
 
-### Ongoing Work
+## Protocol Blindness Clarification
 
-- **Active Development:** Real-time server and client progress is visible on the [**`develop` branch**](../../tree/develop).
-- **Theory & Research:** The current protocol draft and threat model are documented in the [research-paper-v0.1.pdf](docs/theory/research-paper-v0.1.pdf).
+In GBV, blindness means authority separation, not UI opacity.
 
-Readers interested in implementation progress, design decisions, or protocol mechanics are encouraged to consult the **develop** branch and accompanying theory documentation.
+- The server is decision-authoritative.
+- The server does not rely on dataset validity labels.
+- The client cannot influence verifier outcomes.
+
+The extension can display full server-returned metadata without violating protocol blindness.
+
+---
+
+## Repository Layout
+
+- [`apps/server`](./apps/server/) - GBV verifier API (`/api/gbv/*`)
+- [`apps/client/synthetic`](./apps/client/synthetic/) - synthetic learning platform surfaces
+- [`apps/extension`](./apps/extension/) - Chrome MV3 GBV client
+- [`packages/gbv-core`](./packages/gbv-core/) - canonicalization, invariants, commitments, receipts
+- [`packages/gbv-config`](./packages/gbv-config/) - shared runtime configuration
+- [`docs/`](./docs/) - architecture, protocol, threat model, walkthroughs, and reports
+
+---
+
+## Research Paper Versioning
+
+Research drafts are versioned independently from implementation code.
+
+Current public research draft:
+
+- [`docs/research/gbv_public_v0.214.pdf`](./docs/research/gbv_public_v0.214.pdf)
+
+---
+
+## Prerequisites
+
+- Node.js 22+
+- Corepack
+
+```bash
+corepack enable
+corepack prepare pnpm@10.4.1 --activate
+```
+
+---
+
+## Quickstart
+
+```bash
+corepack pnpm bootstrap
+corepack pnpm dev
+```
+
+Services:
+
+- Synthetic client: [http://localhost:3000](http://localhost:3000)
+- GBV server: [http://localhost:3001](http://localhost:3001)
+- Extension build: [`apps/extension/build`](./apps/extension/build/)
+
+---
+
+## Manual Demo Walkthrough
+
+1. Open `chrome://extensions`.
+2. Enable **Developer Mode**.
+3. Load unpacked extension from [`apps/extension/build`](./apps/extension/build/).
+4. Open `http://localhost:3000/hub`.
+5. Open the extension popup.
+6. Choose a course.
+7. Click **Verify**.
+
+### Expected Baseline Behavior
+
+- `csk_7r2q9p` -> accepted
+- `csk_0a81lm` -> semantic mismatch (`SEMANTIC_VERIFICATION_FAILED`, `module_count_consistency`)
+- `csk_3z19tt` -> semantic mismatch (`SEMANTIC_VERIFICATION_FAILED`, `certificate_id_consistency`)
+- `csk_t1mix` -> semantic mismatch (`SEMANTIC_VERIFICATION_FAILED`, includes `grade_threshold` and `course_key_consistency`)
+
+### Popup Behavior
+
+- Structured summary first (state, status, score, IDs, timing)
+- Grouped protocol sections
+- Expandable **Raw Response** with verbatim verifier payload
+
+---
+
+## Automated Verification
+
+```bash
+corepack pnpm lint
+corepack pnpm typecheck
+corepack pnpm test
+corepack pnpm demo:verify
+```
+
+`demo:verify` validates expected protocol states, mismatch classes, and invariant behavior.
+
+---
+
+## Extension Smoke Test
+
+```bash
+corepack pnpm exec playwright install chromium
+corepack pnpm test:extension-smoke
+```
+
+CI executes these tests under Xvfb.
+
+---
+
+## Debug Logs (Off by Default)
+
+PowerShell:
+
+```powershell
+$env:GBV_DEBUG='1'; corepack pnpm dev
+```
+
+Bash:
+
+```bash
+GBV_DEBUG=1 corepack pnpm dev
+```
+
+---
+
+## Security and Privacy Notes
+
+- Server logs request IDs, timing metrics, and non-sensitive diagnostics only.
+- Raw page HTML is not logged by default.
+- Security disclosures should use GitHub Security Advisories private reporting.
+
+---
+
+## Troubleshooting
+
+**Extension cannot verify**
+
+- Run `corepack pnpm build:extension`
+- Reload unpacked extension
+- Verify `http://localhost:3001/api/health`
+- Verify `http://localhost:3000/api/gbv/courses`
+
+**Extension smoke test fails**
+
+```bash
+corepack pnpm exec playwright install chromium
+```
+
+---
+
+## Documentation
+
+For structured documentation navigation, start with
+[`docs/README.md`](./docs/README.md).
+
+- [`docs/architecture.md`](./docs/architecture.md)
+- [`docs/protocol-overview.md`](./docs/protocol-overview.md)
+- [`docs/threat-model.md`](./docs/threat-model.md)
+- [`docs/demo-walkthrough.md`](./docs/demo-walkthrough.md)
+- [`docs/release-hardening-report.md`](./docs/release-hardening-report.md)
+- [`docs/development-notes.md`](./docs/development-notes.md)
+- [`docs/traceability.md`](./docs/traceability.md)
+- [`docs/research/`](./docs/research/)
+
+---
+
+## Project Policies
+
+- [`SECURITY.md`](./SECURITY.md)
+- [`CONTRIBUTING.md`](./CONTRIBUTING.md)
+- [`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md)
+- [`CHANGELOG.md`](./CHANGELOG.md)
 
 ---
 
 ## License
 
-Licensed under the Apache License, Version 2.0.
+See [`LICENSE`](./LICENSE).

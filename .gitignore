@@ -1,0 +1,16 @@
+node_modules/
+.pnpm-store/
+apps/**/node_modules/
+apps/**/.next/
+apps/**/build/
+apps/**/dist/
+apps/extension/public/manifest.json
+packages/**/node_modules/
+packages/**/dist/
+packages/**/tsconfig.tsbuildinfo
+apps/**/tsconfig.tsbuildinfo
+*.log
+.DS_Store
+.tmp-extension-smoke-profile/
+playwright-report/
+test-results/

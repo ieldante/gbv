@@ -1,15 +1,22 @@
-## Development status
+# @gbv/server
 
-⚠️ **Active development**
+GBV verifier API application (Next.js app router).
 
-This repository is under active development. Files, APIs, and internal structure are still evolving, and additional components will be added incrementally.
+## Endpoints
 
-At this stage:
+- `GET /api/health`
+- `POST /api/gbv/init`
+- `POST /api/gbv/submit`
+- `GET /api/gbv/receipt/:receiptId`
 
-- Core protocol scaffolding and server-side attestation flows are being built.
-- Some files may be placeholders, stubs, or subject to refactoring.
-- Interfaces and data models may change as the protocol stabilizes.
+## Local Commands
 
-Comprehensive documentation will be published once the core implementation is complete and the file structure has stabilized.
+From repo root:
 
-Until then, this repository should be treated as a **work-in-progress prototype**, not a finalized SDK or production-ready system.
+- `corepack pnpm --filter @gbv/server dev`
+- `corepack pnpm --filter @gbv/server test`
+- `corepack pnpm --filter @gbv/server typecheck`
+
+All runtime constants come from `gbv.config.ts`.
+
+See root `README.md` for full-stack setup and extension-driven demo flow.

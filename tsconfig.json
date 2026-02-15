@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "paths": {
+      "@gbv/config": ["packages/gbv-config/src/index.ts"],
+      "@gbv/core": ["packages/gbv-core/src/index.ts"],
+      "@gbv/core/browser": ["packages/gbv-core/src/browser.ts"]
+    }
+  },
+  "include": ["scripts/**/*.ts", "gbv.config.ts"],
+  "exclude": ["node_modules"]
+}
