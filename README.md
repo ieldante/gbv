@@ -11,7 +11,8 @@ This repository provides the official GBV reference implementation. GBV is domai
 > under the Glass Ballroom Verification (GBV) name. Earlier drafts may
 > reference ARGON-V terminology.
 
----
+> [!NOTE]
+> While core protocol mechanics are implemented, certain components remain under iterative refinement as security assumptions and edge cases are stress-tested. Interfaces and internal representations may evolve prior to the v0.1 stabilization milestone.
 
 ## What This Repository Provides
 
