@@ -1,0 +1,35 @@
+{
+  "name": "gbv-reference-implementation",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Official OSS reference implementation for Glass Ballroom Verification (GBV).",
+  "packageManager": "pnpm@10.4.1",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "bootstrap": "corepack pnpm install && corepack pnpm --filter @gbv/extension build",
+    "dev": "tsx scripts/dev-orchestrator.ts",
+    "build": "corepack pnpm -r --if-present run build",
+    "build:extension": "corepack pnpm --filter @gbv/extension build",
+    "lint": "corepack pnpm -r --if-present run lint",
+    "format": "prettier --write .",
+    "typecheck": "corepack pnpm -r --if-present run typecheck",
+    "test": "corepack pnpm -r --if-present run test",
+    "test:server": "corepack pnpm --filter @gbv/server test",
+    "test:attack": "corepack pnpm --filter @gbv/server exec tsx --test tests/attack-mixed-grade.test.ts",
+    "test:extension-smoke": "tsx scripts/extension-smoke.ts",
+    "demo:verify": "tsx scripts/demo-verify.ts",
+    "clean": "rimraf --glob \"apps/**/.next\" \"apps/**/build\" \"apps/**/dist\" \"packages/**/dist\""
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "chrome-launcher": "^1.2.1",
+    "playwright": "^1.51.1",
+    "prettier": "^3.5.2",
+    "puppeteer-core": "^24.26.1",
+    "rimraf": "^6.0.1",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3"
+  }
+}

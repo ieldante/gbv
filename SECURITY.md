@@ -1,52 +1,45 @@
 # Security Policy
 
-## Responsible Disclosure
-
-ARGON-V is an adversarial-resistant protocol, and security and integrity are treated as first-class design goals. We welcome and appreciate responsible disclosure from security researchers, protocol analysts, and systems engineers.
-
-At this stage, ARGON-V is an early protocol and systems design (v0.1). Security reports may concern logical flaws, economic attacks, invariant violations, or weaknesses in the formal specification, in addition to issues in any reference implementations.
-
----
-
 ## Reporting a Vulnerability
 
-If you identify a potential security issue in the ARGON-V protocol specification or its reference implementations, please do **not** use the public issue tracker.
+Do not open public issues for security vulnerabilities.
 
-Instead, report the issue privately to the maintainer:
+Use GitHub Security Advisories private reporting:
 
-**Reporting channel:** dante@youroasis.ai
+1. Open the repository **Security** tab.
+2. Select **Report a vulnerability**.
+3. Submit a private advisory with details.
 
-Please include, where applicable:
+## What to Include
 
-- A clear description of the issue or vulnerability  
-- The affected protocol stage (e.g., Stage III: Semantic Intersection)  
-- A proof-of-concept, attack sketch, or theoretical walkthrough  
-- Potential impact on correctness, security, or economic guarantees  
-- Suggested mitigations or design alternatives (if available)
+- clear vulnerability description
+- affected GBV stage/component
+- reproducible steps
+- expected attacker model/capability
+- observed impact
+- optional mitigation proposal
 
----
+## Priority Scope
 
-## Scope of Security Review
+Highest priority findings include:
 
-During the current **Pre-Birth / Specification Drafting** phase, we are particularly interested in reports covering:
+- nonce-binding bypasses
+- semantic invariant bypasses
+- verifier authority/blindness violations
+- receipt/commitment integrity flaws
+- extension collection flow bypasses
 
-- **Logical flaws** — Bypasses or inconsistencies in the five-stage pipeline  
-- **Economic attacks** — Techniques that reduce the cost of forgery without violating semantic coherence  
-- **Protocol invariants** — Contradictions or weaknesses in the formal specification (`SPEC.md`)  
-- **Adversarial assumptions** — Gaps or unrealistic constraints in the threat model  
+## Response Expectations
 
----
+- acknowledgement target: 72 hours
+- triage and reproduction
+- coordinated remediation
+- optional attribution upon fix (on request)
 
-## Our Commitment
+## Safe Harbor
 
-If you follow the responsible disclosure process outlined above, we commit to:
+Good-faith testing and responsible private disclosure are welcome.
 
-- Acknowledging receipt of your report within **48–72 hours**  
-- Working with you to understand, validate, and reproduce the issue  
-- Crediting you in security advisories or specification revisions, where appropriate  
+## Scope Context
 
----
-
-## Non-Disclosure Policy
-
-We ask that reported issues are not disclosed publicly until they have been addressed in the specification or resolved in a subsequent protocol revision. This policy is intended to support responsible discussion during early development and does not preclude future public disclosure once the protocol reaches a stable release.
+This repository is a local-first protocol reference implementation. Reports should prioritize protocol correctness and verification integrity over hosted production hardening concerns.
