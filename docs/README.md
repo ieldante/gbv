@@ -50,6 +50,6 @@ navigate the protocol, security model, and reference environment.
 
 ## Research
 
-- [GBV Public Research Draft (v0.214)](./research/gbv_public_v0.214.pdf)
+- [GBV Scrapped Research Draft](./research/gbv_scrapped_draft.pdf)
 
-This draft marks the public transition from ARGON-V to GBV.
+This archived draft represents an earlier GBV research direction that was ultimately discontinued and is preserved for reference.
