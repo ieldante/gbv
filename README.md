@@ -1,3 +1,8 @@
+> [!WARNING]
+> This project has been discontinued and is preserved only as an archived reference implementation.
+>
+> The current repository is not secure for production use. It contains known security limitations and unresolved design issues that are intentionally not documented here. Do not rely on this implementation for credential verification, access control, or any security-sensitive workflow.
+
 # Glass Ballroom Verification (GBV) Reference Implementation
 
 **Glass Ballroom Verification (GBV)** is a deterministic client-server verification protocol for evaluating cross-surface semantic consistency of browser-observable artifacts under verifier authority.
@@ -28,12 +33,13 @@ GBV evaluates whether independently observed surfaces can represent a single coh
 
 ## What This Repository Is Not
 
+- Not an actively maintained project.
 - Not a production credential verification service.
+- Not a security-complete implementation.
 - Not a hosted SaaS deployment.
 - Not a provider-integrated system with authentication, rate limiting, or tenant isolation.
 
-This repository is a protocol reference and research implementation.
-
+This repository is preserved as a protocol reference and archived research implementation.
 ---
 
 ## Protocol Blindness Clarification
@@ -63,9 +69,11 @@ The extension can display full server-returned metadata without violating protoc
 
 Research drafts are versioned independently from implementation code.
 
-Current public research draft:
+Archived research draft:
 
-- [`docs/research/gbv_public_v0.214.pdf`](./docs/research/gbv_public_v0.214.pdf)
+- [`docs/research/gbv_scrapped_draft.pdf`](./docs/research/gbv_scrapped_draft.pdf)
+
+This draft represents an earlier GBV research direction that was ultimately discontinued and is preserved for reference.
 
 ---
 
@@ -163,6 +171,8 @@ GBV_DEBUG=1 corepack pnpm dev
 
 ## Security and Privacy Notes
 
+- This repository contains known unresolved security limitations.
+- These limitations are intentionally not documented in this public archive.
 - Server logs request IDs, timing metrics, and non-sensitive diagnostics only.
 - Raw page HTML is not logged by default.
 - Security disclosures should use GitHub Security Advisories private reporting.
